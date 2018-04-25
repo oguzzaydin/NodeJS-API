@@ -6,7 +6,7 @@ const methodOverride = require('method-override'); //Lets you use HTTP verbs suc
 const cors = require('cors'); //Middleware create
 const helmet = require('helmet') // HTTP header security module
 const passport = require('passport'); //Kimlik doğrulaması
-
+const routes = require('../api/routes/v1');
 
 const app = express();
 
@@ -18,7 +18,9 @@ const app = express();
 // secure apps by setting various HTTP headers
 app.use(helmet());
 
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/v1', routes);
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors());
 app.use(methodOverride());
