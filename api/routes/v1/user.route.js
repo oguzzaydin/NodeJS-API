@@ -1,7 +1,9 @@
 const express = require('express');
 const validate = require('express-validation');
 const controller = require('../../controllers/user.controller');
-// const { authorize, ADMIN, LOGGED_USER } = require('../../middlewares/auth');
+
+
+//const { authorize, ADMIN, LOGGED_USER } = require('../../middlewares/auth');
 
 
 // const {

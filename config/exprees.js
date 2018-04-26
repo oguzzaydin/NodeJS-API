@@ -12,23 +12,23 @@ const app = express();
 
 
 // request logging dev: console
-// app.use(morgan(logs));
+//app.use(morgan(logs));
 
 
-// secure apps by setting various HTTP headers
 app.use(helmet());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/v1', routes);
-// enable CORS - Cross Origin Resource Sharing
+
 app.use(cors());
 app.use(methodOverride());
 app.use(helmet());
 app.use(cors());
 app.use(passport.initialize());
+// app.use(error.converter);
+// app.use(error.notFound);
+// app.use(error.handler);
 
-
-// app.use('/v1', routes);
 
 module.exports = app;
