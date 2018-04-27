@@ -15,8 +15,10 @@ const router = express.Router();
 router
     .route('/')
     .post(expressJoiMiddleware(userModel.userCreateModel, option.options), (req, res, next) => {
-        res.json(req.validated.error);
-        next();
+        if (req.validated.error)
+            res.json(req.validated.error);
+        else
+            next();
     }, controller.create);
 
 

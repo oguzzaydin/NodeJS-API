@@ -6,16 +6,6 @@ const { env, jwtSecret, jwtExpirationInterval } = require('../../config/vars');
 const APIError = require('../utils/APIError');
 const Validator = require('../validations/user.validator');
 
-
-
-
-
-
-
-
-
-
-
 const userSchema = new mongoose.Schema({
     email: {
         type: String,

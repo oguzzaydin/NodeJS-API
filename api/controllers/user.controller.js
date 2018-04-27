@@ -12,8 +12,19 @@ exports.create = (req, res, next) => {
         });
     } else {
         try {
+
             res.status(httpStatus.CREATED);
-            next(userRepository.registerUser(req.body));
+            userRepository.registerUser(req.body, (error, result) => {
+
+                if (error) {
+
+                    res.send({ "error": error });
+
+                } else {
+
+                    res.send({ "success": "success" });
+                }
+            });
         } catch (error) {
             res.json({
                 error: error.message,
