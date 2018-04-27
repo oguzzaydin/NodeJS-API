@@ -3,16 +3,22 @@ const userRepository = require('../repository/user.repository');
 
 
 
-exports.create = async(req, res, next) => {
+exports.create = (req, res, next) => {
 
-    if (!req.body.email) {
-        res.json({ success: false, message: 'You must provide an e-mail' });
+    if (!req.body) {
+        res.json({
+            success: false,
+            message: 'User not found in controller create message'
+        });
     } else {
-        if (!req.body.password) {
-            res.json({ success: false, message: 'You must provide a password' });
-        } else {
-            const user = req.body;
-            userRepository.registerUser(user);
+        try {
+            res.status(httpStatus.CREATED);
+            next(userRepository.registerUser(req.body));
+        } catch (error) {
+            res.json({
+                error: error.message,
+                info: 'user catch blog erorr'
+            });
         }
     }
 

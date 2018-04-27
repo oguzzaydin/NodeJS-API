@@ -1,13 +1,13 @@
-function UserModel(user) {
-    email: user.email;
-    password: user.password;
+const Joi = require('joi');
+
+const userCreateModel = {
+    body: {
+        email: Joi.string().email().required(),
+        password: Joi.string().min(6).max(128).required(),
+    }
 }
 
-function createUser(user) {
-    return new UserModel(user);
 
 
 
-}
-
-module.exports.createUser = createUser;
+exports.userCreateModel = userCreateModel;

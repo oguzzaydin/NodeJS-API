@@ -1,22 +1,24 @@
 const express = require('express');
 const validate = require('express-validation');
 const controller = require('../../controllers/user.controller');
+const userModel = require('../../models/user.model');
+const Joi = require('joi');
+const expressJoiMiddleware = require('express-joi-middleware');
+const option = require('../../validations/validation.option');
 
 
-//const { authorize, ADMIN, LOGGED_USER } = require('../../middlewares/auth');
 
 
-// const {
-//     listUsers,
-//     createUser,
-//     replaceUser,
-//     updateUser
-// } = require('../../validations/user.validation');
 
 const router = express.Router();
 
 router
     .route('/')
-    .post(controller.create);
+    .post(expressJoiMiddleware(userModel.userCreateModel, option.options), (req, res, next) => {
+        res.json(req.validated.error);
+        next();
+    }, controller.create);
+
+
 
 module.exports = router;
